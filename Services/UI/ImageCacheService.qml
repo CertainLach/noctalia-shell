@@ -94,6 +94,10 @@ Singleton {
       callback("", false);
       return;
     }
+    if (sourcePath.endsWith(".gif")) {
+      callback(sourcePath, true);
+      return;
+    }
 
     getMtime(sourcePath, function (mtime) {
       const cacheKey = generateThumbnailKey(sourcePath, mtime);
