@@ -4,6 +4,7 @@ import "../../../../Helpers/AdvancedMath.js" as AdvancedMath
 import qs.Commons
 import qs.Services.Keyboard
 import qs.Services.UI
+import qs.Services.Misc
 
 Item {
   id: root
@@ -14,6 +15,15 @@ Item {
   property string iconMode: Settings.data.appLauncher.iconMode
   property bool handleSearch: true // Contribute to regular search
   property string supportedLayouts: "list"
+
+  Connections {
+    target: QalculateService
+    function onEvalCompleted() {
+      if (launcher) {
+        launcher.updateResults();
+      }
+    }
+  }
 
   // Initialize provider
   function init() {
@@ -26,12 +36,15 @@ Item {
       return [];
 
     const trimmed = query.trim();
-    if (!trimmed || !isMathExpression(trimmed))
+    if (!trimmed)
       return [];
 
     try {
-      const result = AdvancedMath.evaluate(trimmed);
-      const formattedResult = AdvancedMath.formatResult(result);
+      QalculateService.evaluate(trimmed);
+      const formattedResult = QalculateService.result
+      // Result is pending, output will be refreshed by connection
+      if (!formattedResult)
+        return [];
       return [
             {
               "name": formattedResult,
@@ -42,6 +55,7 @@ Item {
               "provider": root,
               "onActivate": function () {
                 // Copy result to clipboard via xclip
+                const formattedResult = QalculateService.result;
                 Quickshell.execDetached(["sh", "-c", "echo -n '" + formattedResult.replace(/'/g, "'\\''") + "' | wl-copy"]);
                 ToastService.showNotice(I18n.tr("common.copied-to-clipboard"), formattedResult);
                 if (launcher)
@@ -52,6 +66,7 @@ Item {
     } catch (error) {
       return [];
     }
+    return results;
   }
 
   // Check if a string is a valid math expression
