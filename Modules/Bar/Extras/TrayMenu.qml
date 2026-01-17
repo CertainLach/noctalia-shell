@@ -20,7 +20,7 @@ PopupWindow {
   property int widgetIndex: -1
 
   // Derive menu from trayItem (only used for non-submenus)
-  readonly property QsMenuHandle menu: isSubMenu ? null : (trayItem ? trayItem.menu : null)
+  property QsMenuHandle menu: isSubMenu ? null : (trayItem ? trayItem.menu : null)
 
   // Compute if current tray item is pinned
   readonly property bool isPinned: {
@@ -489,7 +489,7 @@ PopupWindow {
       // PIN / UNPIN
       Rectangle {
         visible: {
-          if (widgetSection === "" || widgetIndex < 0)
+          if (!trayItem || widgetSection === "" || widgetIndex < 0)
             return false;
           var widgets = Settings.getBarWidgetsForScreen(root.screen?.name)[widgetSection];
           if (!widgets || widgetIndex >= widgets.length)
