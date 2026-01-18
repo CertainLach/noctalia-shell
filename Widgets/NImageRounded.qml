@@ -25,7 +25,7 @@ Item {
     border.width: root.borderWidth
     border.color: root.borderColor
 
-    Image {
+    AnimatedImage {
       id: imageSource
       anchors.fill: parent
       anchors.margins: root.borderWidth
@@ -36,6 +36,7 @@ Item {
       asynchronous: true
       antialiasing: true
       fillMode: root.imageFillMode
+      playing: true
     }
 
     ShaderEffect {

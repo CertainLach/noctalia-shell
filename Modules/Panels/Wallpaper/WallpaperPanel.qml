@@ -300,16 +300,16 @@ SmartPanel {
               onClicked: solidColorPicker.open()
             }
 
-            NIconButton {
-              icon: "settings"
-              tooltipText: I18n.tr("panels.wallpaper.settings-title")
-              baseSize: Style.baseWidgetSize * 0.8
-              onClicked: {
-                var settingsPanel = PanelService.getPanel("settingsPanel", screen);
-                settingsPanel.requestedTab = SettingsPanel.Tab.Wallpaper;
-                settingsPanel.open();
-              }
-            }
+            // NIconButton {
+            //   icon: "settings"
+            //   tooltipText: I18n.tr("panels.wallpaper.settings-title")
+            //   baseSize: Style.baseWidgetSize * 0.8
+            //   onClicked: {
+            //     var settingsPanel = PanelService.getPanel("settingsPanel", screen);
+            //     settingsPanel.requestedTab = SettingsPanel.Tab.Wallpaper;
+            //     settingsPanel.open();
+            //   }
+            // }
 
             NIconButton {
               icon: "close"

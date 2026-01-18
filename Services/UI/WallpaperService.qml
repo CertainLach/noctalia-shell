@@ -423,6 +423,9 @@ Singleton {
     // Emit signal for this specific wallpaper change
     root.wallpaperChanged(screenName, path);
 
+    swwwProcess.command = ["swww", "img", path, "--outputs", screenName, "--filter", "Nearest", "--transition-type", "outer"];
+    swwwProcess.running = true;
+
     // Restart the random wallpaper timer
     if (randomWallpaperTimer.running) {
       randomWallpaperTimer.restart();
@@ -935,6 +938,19 @@ Singleton {
   // -------------------------------------------------------------------
   function scanDirectoryRecursive(screenName, directory) {
     _scanDirectoryInternal(screenName, directory, true, true, null);
+  }
+
+  Process {
+    id: swwwProcess
+    stdout: StdioCollector {}
+    stderr: StdioCollector {}
+
+    onExited: exitCode => {
+      if (exitCode !== 0) {
+        Logger.w("Wallpaper", "swww failed with exit code", exitCode);
+        Logger.w("Wallpaper", "stderr:", stderr.text);
+      }
+    }
   }
 
   // -------------------------------------------------------------------
