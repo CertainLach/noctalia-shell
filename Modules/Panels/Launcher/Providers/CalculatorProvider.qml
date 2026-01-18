@@ -35,9 +35,13 @@ Item {
     if (!query)
       return [];
 
-    const trimmed = query.trim();
+    let trimmed = query.trim();
     if (!trimmed)
       return [];
+
+    if (!trimmed.startsWith('='))
+      return [];
+    trimmed = trimmed.slice(1).trim();
 
     try {
       QalculateService.evaluate(trimmed);
