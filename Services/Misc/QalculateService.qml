@@ -40,7 +40,7 @@ Singleton {
         lastExpr = expr;
         loading = true;
         waitingForEval = true;
-        evalProc.command = ["qalc", "-t", expr];
+        evalProc.command = ["qalc", "--", expr];
         evalProc.running = true;
     }
 }
