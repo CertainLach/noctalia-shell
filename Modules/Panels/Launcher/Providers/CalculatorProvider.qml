@@ -51,7 +51,7 @@ Item {
         return [];
       return [
             {
-              "name": formattedResult,
+              "name": formattedResult.replace(/\n/g, '; '),
               "description": I18n.tr("launcher.providers.calculator-press-enter-to-copy"),
               "icon": iconMode === "tabler" ? "calculator" : "accessories-calculator",
               "isTablerIcon": true,
