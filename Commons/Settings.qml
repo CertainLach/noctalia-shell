@@ -359,7 +359,7 @@ Singleton {
 
     // wallpaper
     property JsonObject wallpaper: JsonObject {
-      property bool enabled: true
+      property bool enabled: false
       property bool overviewEnabled: false
       property string directory: ""
       property list<var> monitorDirectories: []

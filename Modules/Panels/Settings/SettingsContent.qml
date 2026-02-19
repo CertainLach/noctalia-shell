@@ -503,12 +503,12 @@ Item {
             "icon": "settings-color-scheme",
             "source": colorSchemeTab
           },
-          {
-            "id": SettingsPanel.Tab.Wallpaper,
-            "label": "common.wallpaper",
-            "icon": "settings-wallpaper",
-            "source": wallpaperTab
-          },
+          // {
+          //   "id": SettingsPanel.Tab.Wallpaper,
+          //   "label": "common.wallpaper",
+          //   "icon": "settings-wallpaper",
+          //   "source": wallpaperTab
+          // },
           {
             "id": SettingsPanel.Tab.Bar,
             "label": "panels.bar.title",
